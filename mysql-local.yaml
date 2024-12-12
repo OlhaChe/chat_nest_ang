@@ -1,0 +1,14 @@
+services:
+  mysqldb:
+    image: mysql:latest
+    container_name: mysql-db
+    environment:
+      - MYSQL_DATABASE=messangerDb
+      - MYSQL_ROOT_PASSWORD=admin
+    ports:
+      - 3306:3306
+    volumes:
+      - db:/var/lib/mysql
+volumes:
+  db:
+    driver: local

@@ -1,0 +1,76 @@
+<div class="flex flex-col flex-grow overflow-y-auto bg-white p-4">
+  <div class="flex-grow overflow-y-auto bg-white rounded-lg shadow p-4 mb-4 max-h-[50%]">
+    <div *ngFor="let msg of messages"
+         class="mb-3 group hover:bg-gray-50 p-2 rounded transition-colors duration-200">
+      <div class="flex items-center justify-between">
+        <div>
+          <strong>{{ msg.sender?.userName }}:</strong>
+          {{ msg.content }}
+        </div>
+        <div class="hidden group-hover:flex items-center space-x-2">
+          <button
+            class="text-blue-500 hover:text-blue-700 transition-colors"
+            (click)="editMessage(msg)"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M12 20h9"></path>
+              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+            </svg>
+          </button>
+
+          <button
+            class="text-red-500 hover:text-red-700 transition-colors"
+            (click)="deleteMessage(msg)"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M3 6h18"></path>
+              <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+              <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+            </svg>
+          </button>
+        </div>
+    </div>
+      <div class="text-sm text-gray-500">{{ msg.createdAt }}</div>
+      <div *ngIf="msg.files && msg.files.length > 0">
+        <div *ngFor="let file of msg.files"
+             class="mb-3">
+          {{ file.name }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-file-upload (filesChange)="onFilesChanged($event)"
+                   [initialFiles]="selectedMessage ? selectedMessage.files : []"
+                   (uploading)="onUploadStatusChange($event)"></app-file-upload>
+  <div class="flex">
+    <input
+      *ngIf="!isEditing"
+      [(ngModel)]="newMessage"
+      (keyup.enter)="sendMessage()"
+      placeholder="Enter a message"
+      class="flex-grow p-2 border rounded"
+    >
+    <input
+      *ngIf="isEditing"
+      [(ngModel)]="editingMessage"
+      (keyup.enter)="saveEditedMessage()"
+      placeholder="Edit message"
+      class="flex-grow p-2 border rounded"
+    >
+    <button
+      *ngIf="!isEditing"
+      (click)="sendMessage()"
+      class="ml-2 px-4 py-2 bg-blue-500 text-white rounded"
+    >
+      Send
+    </button>
+    <button
+      *ngIf="isEditing"
+      (click)="saveEditedMessage()"
+      class="ml-2 px-4 py-2 bg-blue-600 text-white rounded"
+    >
+      Save
+    </button>
+  </div>
+</div>

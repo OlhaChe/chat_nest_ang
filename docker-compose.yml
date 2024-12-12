@@ -1,0 +1,39 @@
+services:
+  backend:
+    build:
+      context: ./packages/messenger-api
+    ports:
+      - "3000:3000"
+    environment:
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_USER=user
+      - DB_PASSWORD=password
+      - DB_NAME=messangerdb
+      - JWT_ACCESS_SECRET=nestjsPrismaAccessSecret
+      - FILE_UPLOAD_PATH=./uploads
+    depends_on:
+      - mysql
+
+  frontend:
+    build:
+      context: ./packages/messenger-frontend-ang
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: messangerdb
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - mysql-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+volumes:
+  mysql-data:

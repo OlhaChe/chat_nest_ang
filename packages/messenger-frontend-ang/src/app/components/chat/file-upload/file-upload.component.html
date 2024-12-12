@@ -1,0 +1,22 @@
+<div class="file-upload-container">
+  <button (click)="fileInput.click()"
+          [disabled]="ongoingUploads > 0"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+    <path d="M21 16V7a5 5 0 0 0-10 0v10a3 3 0 0 0 6 0V9"></path>
+  </svg></button>
+  <input #fileInput
+         type="file"
+         multiple
+         (change)="onFileSelected($event)"
+         hidden />
+
+  <ul>
+    <li *ngFor="let file of files; let i = index">
+      {{ file.name }} - {{ file.status }}
+      <button class="text-red-500 hover:text-red-700 transition-colors" (click)="deleteFile(i)">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </li>
+  </ul>
+</div>

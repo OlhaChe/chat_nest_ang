@@ -1,0 +1,60 @@
+<div class="flex flex-col items-center justify-center h-screen bg-secondary">
+  <h1 class="text-2xl font-bold text-primary mb-4">Register</h1>
+  <form class="space-y-6" [formGroup]="registerForm" (ngSubmit)="register()">
+    <div>
+      <label class="block text-sm/6 font-medium text-gray-900" for="userName">UserName</label>
+      <div class="mt-2">
+        <input
+          id="userName"
+          formControlName="userName"
+          type="text"
+          placeholder="user Name"
+          class="border border-gray-300 p-2 mb-4 focus:outline-none focus:ring-2 focus:ring-primary block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+        />
+        <div *ngIf="registerForm.controls.userName.invalid && registerForm.controls.userName.touched">
+          Valid user name is required.
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <label class="block text-sm/6 font-medium text-gray-900" for="email">Email</label>
+      <div class="mt-2">
+        <input
+          id="email"
+          formControlName="email"
+          type="email"
+          placeholder="Email"
+          class="border border-gray-300 p-2 mb-4 focus:outline-none focus:ring-2 focus:ring-primary block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+        />
+        <div *ngIf="registerForm.controls.email.invalid && registerForm.controls.email.touched">
+          Valid email is required.
+        </div>
+      </div>
+    </div>
+    <div>
+      <label class="block text-sm/6 font-medium text-gray-900" for="password">Password</label>
+      <input
+        id="password"
+        formControlName="password"
+        type="password"
+        placeholder="Password"
+        class="border border-gray-300 p-2 mb-4 focus:outline-none focus:ring-2 focus:ring-primary block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+      />
+      <div *ngIf="registerForm.controls.password.invalid && registerForm.controls.password.touched">
+        Valid email is required.
+      </div>
+    </div>
+
+
+    <button
+      type="submit"
+      [disabled]="registerForm.invalid"
+      class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-pink-700">
+      Register
+    </button>
+  </form>
+  <p>
+    Already have an account? <a routerLink="/login">Login here</a>
+  </p>
+</div>

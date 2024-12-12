@@ -1,0 +1,25 @@
+{
+    "name": "messager-website",
+    "private": true,
+    "version": "1.0.0",
+    "workspaces": [
+        "packages/messenger-api",
+        "packages/messenger-frontend-ang"
+    ],
+    "scripts": {
+        "build": "yarn workspaces run build",
+        "dev": "concurrently  \"yarn workspace messenger-api start:dev\" \"yarn workspace messager-front dev\"",
+        "test": "yarn workspace messenger-api test",
+        "lint": "yarn workspaces run lint"
+    },
+    "devDependencies": {
+        "concurrently": "^8.2.2",
+        "lerna": "^8.1.2"
+    },
+    "dependencies": {
+        "@nestjs/typeorm": "^10.0.2",
+        "mysql2": "^3.11.5",
+        "react-virtualized": "^9.22.5",
+        "typeorm": "^0.3.20"
+    }
+}

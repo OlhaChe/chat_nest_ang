@@ -1,0 +1,16 @@
+<header class="bg-gray-800 text-white py-3 px-4 flex justify-between items-center">
+  <div>
+    <a routerLink="/" *ngIf="showBackButton" class="text-white hover:text-blue-300">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+      </svg>
+    </a>
+  </div>
+
+  <button
+    class="hover:underline px-4 py-2 rounded text-white hover:text-blue-300"
+    (click)="logout()"
+  >
+    Logout
+  </button>
+</header>
